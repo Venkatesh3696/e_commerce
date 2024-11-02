@@ -1,4 +1,4 @@
-import { API_URL } from '@/config';
+import { API_URL } from '../../store/auth-slice/index.js';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
