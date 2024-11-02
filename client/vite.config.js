@@ -7,7 +7,23 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, './src'),
+			'@': path.resolve(__dirname, './client/src'),
 		},
 	},
+	build: {
+		outDir: 'dist',
+		sourcemap: true,
+		rollupOptions: {
+			output: {
+				manualChunks: undefined,
+			},
+		},
+		// Ensure _redirects is copied to build output
+		copyPublicDir: true,
+	},
+	server: {
+		port: 3000,
+	},
+	// Add this to copy _redirects to build output
+	publicDir: 'public',
 });
