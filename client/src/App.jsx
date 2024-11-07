@@ -114,12 +114,12 @@ function App() {
 				/>
 			</Route>
 			<Route
-				path='*'
-				element={<NotFound />}
-			/>
-			<Route
 				path='/unauth-page'
 				element={<UnAuthPage />}
+			/>
+			<Route
+				path='*'
+				element={<NotFound />}
 			/>
 		</Routes>
 	);
