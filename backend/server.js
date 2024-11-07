@@ -16,7 +16,7 @@ connectDb();
 
 const app = express();
 
-app.use(cors(corsConfig));
+app.use(cors());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
