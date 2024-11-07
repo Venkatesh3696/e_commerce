@@ -1,12 +1,14 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import { configDotenv } from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import { connectDb } from './config/connectDb.js';
 import { corsConfig } from './config/corsConfig.js';
-import authRouter from './routes/auth.route.js';
+
+// routes
+import authRouter from './routes/auth/auth.route.js';
+import adminProductsRouter from './routes/admin/products.routes.js';
 
 configDotenv();
 
@@ -20,6 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/auth', authRouter);
+app.use('/api/admin/products', adminProductsRouter);
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');

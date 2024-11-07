@@ -15,12 +15,13 @@ const CommonForm = ({
 	setFormData,
 	onSubmit,
 	buttonText,
+	isButtonDisabled,
 }) => {
 	const renderInputsByComponentType = (getControlItem) => {
 		let element = null;
 		const value = formData[getControlItem.name] || '';
 
-		switch (getControlItem.componentTyoe) {
+		switch (getControlItem.componentType) {
 			case 'input':
 				element = (
 					<Input
@@ -29,7 +30,6 @@ const CommonForm = ({
 						id={getControlItem.name}
 						type={getControlItem.type}
 						value={value}
-						autoComplete
 						onChange={(event) =>
 							setFormData({
 								...formData,
@@ -51,9 +51,7 @@ const CommonForm = ({
 						value={value}
 					>
 						<SelectTrigger className='w-full'>
-							<SelectValue
-								placeholder={getControlItem.placeholder}
-							/>
+							<SelectValue placeholder={getControlItem.label} />
 						</SelectTrigger>
 						<SelectContent>
 							{getControlItem?.options.length > 0
@@ -90,7 +88,7 @@ const CommonForm = ({
 				element = (
 					<Input
 						name={getControlItem.name}
-						placeHolder={getControlItem.placeholder}
+						placeholder={getControlItem.placeholder}
 						id={getControlItem.name}
 						type={getControlItem.type}
 						value={value}
@@ -106,6 +104,8 @@ const CommonForm = ({
 		}
 		return element;
 	};
+
+	console.log(isButtonDisabled, 'diabled');
 
 	return (
 		<form onSubmit={onSubmit}>
@@ -125,6 +125,7 @@ const CommonForm = ({
 			<Button
 				type='submit'
 				className='mt-2 w-full'
+				disabled={isButtonDisabled}
 			>
 				{buttonText || 'Submit'}
 			</Button>

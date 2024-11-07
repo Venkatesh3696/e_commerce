@@ -58,11 +58,13 @@ export const loginUser = async (req, res) => {
 				message: "passwords doesn't match please Try again",
 			});
 		}
+		checkUser.password = '';
 		const token = Jwt.sign(
 			{
 				id: checkUser._id,
 				role: checkUser.role,
 				email: checkUser.email,
+				userName: checkUser.userName,
 			},
 			process.env.JWT_SECRET,
 			{ expiresIn: '60m' },

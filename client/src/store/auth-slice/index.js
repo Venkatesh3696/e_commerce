@@ -1,4 +1,4 @@
-import { API_URL } from '../../store/auth-slice/index.js';
+import { API_URL } from '@/config/index.js';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -45,9 +45,13 @@ export const checkAuth = createAsyncThunk('/auth/checkauth', async () => {
 });
 
 export const logoutUser = createAsyncThunk('/auth/logout', async () => {
-	const response = await axios.post('http://localhost:5000/api/auth/logout', {
-		withCredentials: true,
-	});
+	const response = await axios.post(
+		'http://localhost:5000/api/auth/logout',
+		{},
+		{
+			withCredentials: true,
+		},
+	);
 	return response.data;
 });
 
@@ -103,6 +107,11 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.isAuthenticated = false;
 				state.user = null;
+			})
+			.addCase(logoutUser.fulfilled, (state) => {
+				state.isLoading = false;
+				state.user = null;
+				state.isAuthenticated = false;
 			});
 	},
 });
